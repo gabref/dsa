@@ -2,20 +2,20 @@
 
 ## Requirements
 
-[] size() - number of items
-[] is_empty()
-[] at(index) - returns item at given index, blows up if index out of bounds
-[] push_begin(item)
-[] push_end(item)
-[] pop_begin()
-[] pop_end()
-[] get_begin() - get first value
-[] get_end() - get last value
-[] insert(index, item) - insert item at index
-[] delete(index) - delete item at index
-[] reverse() - reverses the list
-[] remove(item) - looks for value and removes index first occurence
-[] find (item) - looks for value and returns first index with that value, -1 if not found
+- [ ] size() - number of items
+- [ ] is_empty()
+- [ ] at(index) - returns item at given index, blows up if index out of bounds
+- [ ] push_begin(item)
+- [ ] push_end(item)
+- [ ] pop_begin()
+- [ ] pop_end()
+- [ ] get_begin() - get first value
+- [ ] get_end() - get last value
+- [ ] insert(index, item) - insert item at index
+- [ ] delete(index) - delete item at index
+- [ ] reverse() - reverses the list
+- [ ] remove(item) - looks for value and removes index first occurence
+- [ ] find (item) - looks for value and returns first index with that value, -1 if not found
 
 ## Implementation Logic
 

@@ -2,7 +2,7 @@
 
 ## Requirements
 
-[] is_empty()
-[] push()
-[] pop
-[] display
+- [ ] is_empty()
+- [ ] push()
+- [ ] pop
+- [ ] display
