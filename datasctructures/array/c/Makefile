@@ -1,5 +1,5 @@
 files := main.c array.c test.c
-executable := test_array
+executable := main
 
 main: $(files)
 	gcc $(files) -o $(executable)
