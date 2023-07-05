@@ -2,5 +2,5 @@
 
 ## Datastructures
 
-[Arrays](./datasctructures/array/)
-[Linked List](./datasctructures/linked_list/)
+* [Arrays](./datasctructures/array/)
+* [Linked List](./datasctructures/linked_list/)
