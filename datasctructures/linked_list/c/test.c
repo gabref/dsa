@@ -17,6 +17,9 @@ void run_all_tests() {
     test_get_beg();
     test_get_end();
     test_insert();
+    test_delete();
+    test_remove();
+    test_find();
 
     printf("\n\nAll tests ok\n\n");
 }
@@ -128,6 +131,72 @@ void test_insert() {
     assert(gll_at(&myLL, 1) == 5);
     assert(gll_at(&myLL, 2) == 6);
     assert(gll_at(&myLL, 3) == 7);
+
+    gll_destroy(&myLL);
+}
+
+void test_delete() {
+    printf("Testing delete\n");
+
+    gnode * myLL = gll_create();
+
+    for (int i = 0; i < 6; i++)
+        gll_push_beg(&myLL, i * 10);
+
+    gll_delete(&myLL, 0);
+    gll_delete(&myLL, 2);
+    gll_delete(&myLL, 3);
+
+    assert(gll_at(&myLL, 0) == 40);
+    assert(gll_at(&myLL, 1) == 30);
+    assert(gll_at(&myLL, 2) == 10);
+
+    gll_destroy(&myLL);
+}
+
+void test_remove() {
+    printf("Testing remove\n");
+
+    gnode * myLL = gll_create();
+
+    gll_remove(&myLL, 3);
+
+    gll_push_end(&myLL, 5);
+    gll_push_end(&myLL, 4);
+    gll_push_end(&myLL, 3);
+    gll_push_end(&myLL, 2);
+    gll_push_end(&myLL, 1);
+
+    gll_remove(&myLL, 1);
+    gll_remove(&myLL, 5);
+    gll_remove(&myLL, 3);
+
+    assert(gll_at(&myLL, 0) == 4);
+    assert(gll_at(&myLL, 1) == 2);
+
+    gll_destroy(&myLL);
+}
+
+void test_find() {
+    printf("Testing find\n");
+
+    gnode * myLL = gll_create();
+
+    gll_remove(&myLL, 3);
+
+    gll_push_beg(&myLL, 5);
+    gll_push_beg(&myLL, 4);
+    gll_push_beg(&myLL, 3);
+    gll_push_beg(&myLL, 2);
+    gll_push_beg(&myLL, 1);
+    gll_push_beg(&myLL, 0);
+
+    assert(gll_find(&myLL, 0) == 0);
+    assert(gll_find(&myLL, 1) == 1);
+    assert(gll_find(&myLL, 2) == 2);
+    assert(gll_find(&myLL, 3) == 3);
+    assert(gll_find(&myLL, 5) == 5);
+    assert(gll_find(&myLL, 7) == -1);
 
     gll_destroy(&myLL);
 }

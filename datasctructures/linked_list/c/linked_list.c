@@ -104,8 +104,7 @@ int gll_get_beg(gnode ** head) {
         fprintf(stderr, "LinkedList is empty\n");
         exit(EXIT_FAILURE);
     }
-    gnode *current = *head;
-    return current->data;
+    return (*head)->data;
 }
 
 int gll_get_end(gnode ** head) {
@@ -146,6 +145,66 @@ void gll_insert(gnode ** head, int index, int value) {
         temp->next = current->next;
         current->next = temp;
     }
+}
+
+void gll_delete(gnode ** head, int index) {
+    if (index < 0) {
+        fprintf(stderr, "Index out of bound\n");
+        exit(EXIT_FAILURE);
+    }
+    if (*head == NULL) {
+        fprintf(stderr, "LinkedList is empty\n");
+        exit(EXIT_FAILURE);
+    }
+    gnode *current = *head;
+    for (int i = 0; i < index - 1; i++) {
+        if (current->next == NULL) {
+            fprintf(stderr, "Index out of bound\n");
+            exit(EXIT_FAILURE);
+        }
+        current = current->next;
+    }
+    if (index == 0) {
+        *head = current->next;
+        free(current);
+    } else {
+        gnode *temp = current->next;
+        current->next = temp->next;
+        free(temp);
+    }
+}
+
+void gll_remove(gnode ** head, int value) {
+    if (*head == NULL) return;
+    gnode *current = *head;
+    gnode *prev = NULL;
+
+    while (current != NULL && current->data != value) {
+
+        prev = current;
+        current = current->next;
+    }
+
+    // if value was not found
+    if (current == NULL) return;
+
+    if (prev == NULL)
+        *head = current->next;
+    else
+        prev->next = current->next;
+    free(current);
+}
+
+int gll_find(gnode ** head, int value) {
+    int i = 0;
+    if (*head == NULL) 
+        return -1;
+    for(gnode *current = *head; current != NULL; current = current->next) {
+        if (current->data == value)
+            return i;
+        i++;
+    }
+    return -1;
 }
 
 void gll_print(gnode ** head) {

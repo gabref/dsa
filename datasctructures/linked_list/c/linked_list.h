@@ -17,6 +17,10 @@ int gll_pop_end(gnode ** head);
 int gll_get_beg(gnode ** head);
 int gll_get_end(gnode ** head);
 void gll_insert(gnode ** head, int index, int value);
+void gll_delete(gnode ** head, int index);
+void gll_remove(gnode ** head, int value);
+int gll_find(gnode ** head, int value);
+
 void gll_print(gnode ** head);
 void gll_destroy(gnode ** head);
 void check_address(void * p);
