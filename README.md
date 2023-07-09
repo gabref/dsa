@@ -4,3 +4,4 @@
 
 * [Arrays](./datasctructures/array/)
 * [Linked List](./datasctructures/linked_list/)
+* [Stack](./datasctructures/stack/)

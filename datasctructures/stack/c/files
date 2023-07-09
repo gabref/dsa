@@ -1,0 +1,200 @@
+stack-linkedlist.c
+
+#include "stack-linkedlist.h"
+
+gstack * gstack_create() {
+    gstack * stack = (gstack *) malloc(sizeof(gstack));
+    check_address(stack);
+    stack = NULL;
+    return stack;
+}
+
+void gstack_print(gstack ** stack) {
+    for (gstack * current = *stack; current != NULL; current = current->next)
+        printf("%d -> ", current->data);
+    printf("NULL\n");
+}
+
+void gstack_push(gstack ** stack, int value) {
+    gstack * new_top = (gstack *) malloc(sizeof(gstack));
+    check_address(new_top);
+
+    new_top->data = value;
+    new_top->next = *stack;
+    *stack = new_top;
+}
+
+int gstack_pop(gstack ** stack) {
+    gstack * temp = (gstack *) malloc(sizeof(gstack));
+    check_address(temp);
+
+    int popped_value = (*stack)->data;
+
+    temp = *stack;
+    *stack = (*stack)->next;
+    free(temp);
+
+    return popped_value;
+}
+
+int gstack_is_emtpy(gstack ** stack) {
+    return *stack == NULL ? 1 : 0;
+}
+
+void check_address(void * p) {
+    if (p == NULL) {
+        fprintf(stderr, "Failed to allocate more memory!\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+stack-linkedlist.h
+
+#ifndef STACK_LINKEDLIST
+#define STACK_LINKEDLIST
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct stack {
+    int data;
+    struct stack * next;
+} gstack;
+
+gstack * gstack_create();
+void gstack_print(gstack ** stack);
+void gstack_push(gstack ** stack, int value);
+int gstack_pop(gstack ** stack);
+int gstack_is_emtpy(gstack ** stack);
+void check_address(void * p);
+
+#endif
+
+stack-array.c
+
+#include "stack-array.h"
+
+// TODO
+
+stack-array.h
+
+#ifndef STACK_ARRAY
+#define STACK_ARRAY
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct stack {
+    int * data;
+    int size;
+    int capacity;
+} gstack;
+
+gstack * gstack_create();
+void gstack_print(gstack ** stack);
+void gstack_push(gstack ** stack, int value);
+int gstack_pop(gstack ** stack);
+int gstack_is_emtpy(gstack ** stack);
+void check_address(void * p);
+
+#endif
+
+test.h
+
+#ifndef TEST_STACK
+#define TEST_STACK
+
+#ifdef LINKEDLIST_IMPLEMENTATION
+#include "stack-linkedlist.h"
+#endif
+
+#ifdef ARRAY_IMPLEMENTATION
+#include "stack-array.h"
+#endif
+
+#include <stdio.h>
+#include <assert.h>
+
+void run_all_tests();
+void test_is_empty();
+void test_push();
+void test_pop();
+
+#endif
+
+test.c
+
+#include "test.h"
+
+extern gstack * gstack_create();
+extern void gstack_push(gstack ** stack, int value);
+extern int gstack_pop(gstack ** stack);
+extern int gstack_is_emtpy(gstack ** stack);
+
+extern void test_flag();
+
+void run_all_tests() {
+    printf("Executing Tests:\n");
+
+    printf("\nCreate stack");
+
+    gstack * stack = gstack_create();
+
+    printf("\nCheck is empty");
+
+    assert(gstack_is_emtpy(&stack) == 1);
+
+    printf("\nPush");
+
+    gstack_push(&stack, 1);
+    gstack_push(&stack, 2);
+    gstack_push(&stack, 3);
+    gstack_push(&stack, 4);
+    gstack_push(&stack, 5);
+
+    printf("\nCheck is empty");
+
+    assert(gstack_is_emtpy(&stack) == 0);
+
+    printf("\nPop");
+
+    assert(gstack_pop(&stack) == 5);
+    assert(gstack_pop(&stack) == 4);
+    assert(gstack_pop(&stack) == 3);
+    assert(gstack_pop(&stack) == 2);
+    assert(gstack_pop(&stack) == 1);
+
+    printf("\nCheck is empty again");
+
+    assert(gstack_is_emtpy(&stack) == 1);
+
+    printf("\n\nAll tests ok\n\n");
+}
+
+main.c
+
+#include "test.h"
+
+int main() {
+    run_all_tests();
+
+    return 0;
+}
+
+Makefile
+
+files := main.c test.c
+stack_array := $(files) stack-array.c
+stack_linkedlist := $(files) stack-linkedlist.c
+executable := main
+
+linkedlist: $(stack_linkedlist)
+	gcc $(stack_linkedlist) -o $(executable) -DLINKEDLIST_IMPLEMENTATION
+	./$(executable)
+
+array: $(stack_array)
+	gcc $(stack_array) -o $(executable) -DARRAY_IMPLEMENTATION
+	./$(executable)
+
+clean:
+	rm -f $(executable)
