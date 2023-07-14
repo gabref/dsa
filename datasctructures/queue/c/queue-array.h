@@ -5,7 +5,9 @@
 #include <stdlib.h>
 
 typedef struct queue {
-
+    int size;
+    int *data;
+    int capacity;
 } gqueue;
 
 gqueue * gqueue_create();
