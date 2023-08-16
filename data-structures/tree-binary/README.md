@@ -11,6 +11,7 @@ A bindary tree is a tree data structure in which each parent node can have at mo
 ### [Full Binary Tree](./../tree-binary-full/README.md)
 Every parent node/internal node has either two or no children
 
+`
        1
       / \
      2   3
@@ -18,6 +19,7 @@ Every parent node/internal node has either two or no children
    4   5
       / \
      6   7
+`
 
 ### [Perfect Binary Tree](./../tree-binary-perfect/README.md)
 Every internal node has exactly two child nodes and all the leaf nodes are at the same level
