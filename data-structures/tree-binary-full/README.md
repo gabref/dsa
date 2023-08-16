@@ -31,13 +31,19 @@ $\lambda$ = number of levels
 7. The number of leaves is at most $2^{\lambda - 1}$
 
 <br>
-$l = i + 1$
-$n = 2i + 1$
+$ l = i + 1 $
+<br>
+$ n = 2i + 1 $
 
+<br>
 $i = \frac{n - 1}{2}$
+<br>
 $l = \frac{n + 1}{2}$
 
+<br>
 $n = 2l - 1$
+<br>
 $i = l - 1$
 
+<br>
 $l = 2^{\lambda - 1}$
