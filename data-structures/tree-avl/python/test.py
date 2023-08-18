@@ -21,8 +21,6 @@ def main():
     root = avl.delete_node(root, 2)
     root = avl.delete_node(root, 5)
     root = avl.delete_node(root, 7)
-    root = avl.delete_node(root, 61)
-    root = avl.delete_node(root, 52)
 
     print('------' * 11)
     avl.print_tree(root)

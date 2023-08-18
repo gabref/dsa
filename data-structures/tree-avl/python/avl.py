@@ -1,7 +1,3 @@
-import sys
-import math
-from io import StringIO
-from pptree import *
 
 class TreeNode:
     def __init__(self, data) -> None:
@@ -71,12 +67,11 @@ class AVLTree:
 
     def right_rotate(self, z: TreeNode):
         y = z.left
-        if y is not None:
-            t2 = y.right
-            y.right = z
-            z.left = t2
-            z.height = 1 + max(self.get_height(z.left), self.get_height(z.right))
-            y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
+        t2 = y.right
+        y.right = z
+        z.left = t2
+        z.height = 1 + max(self.get_height(z.left), self.get_height(z.right))
+        y.height = 1 + max(self.get_height(y.left), self.get_height(y.right))
         return y
 
     def insert_node(self, root: TreeNode | None, data):
@@ -114,6 +109,7 @@ class AVLTree:
         # find the node to be deleted and remove it
         if not root:
             return root
+
         elif data < root.data:
             root.left = self.delete_node(root.left, data)
         elif data > root.data:
@@ -124,15 +120,12 @@ class AVLTree:
                 root = None
                 return temp
             elif root.right is None:
-                temp = root.right 
+                temp = root.left 
                 root = None
                 return temp
             temp = self.get_min_value_node(root.right)
             root.data = temp.data
             root.right = self.delete_node(root.right, temp.data)
-
-        if root is None:
-            return root
 
         # update the balance factor of nodes
         root.height = 1 + max(self.get_height(root.left), self.get_height(root.right))
@@ -150,6 +143,6 @@ class AVLTree:
                 return self.left_rotate(root)
             else:
                 root.right = self.right_rotate(root.right)
-                return self.right_rotate(root)
+                return self.left_rotate(root)
         return root
 
