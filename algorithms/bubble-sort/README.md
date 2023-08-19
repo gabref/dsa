@@ -110,3 +110,7 @@ void bubbleSort(int array[], int size) {
 | last | (n - 2) |
 
 $(n - 1) + (n - 2) + (n - 3) + ... + 1 = n (n - 1) / 2$
+
+## Application
+* complexity does not matter
+* short and simple code is preferred
